@@ -1,47 +1,58 @@
 import java.*;
 
-//constructeur
 public class ChaineCryptée
 {
     
     private int decalage;
-    private String chaineclaire;
+    private String chainecryptee;
 
-    
+    //constructeur
     public ChaineCryptée(int d, String c)
-    {
-        //si la chaine à entrer est null renvoyer chainevide
-        if(c==null) {chaineclaire="chainevide";}
+    {   
+        //si la chaine est null afficher chainevide
+        if(c==null) {chainecryptee="chainevide";}
         else
         {
         this.decalage=d;
-        this.chaineclaire=c;
-		}
-    }
+        int i;
+        char ch;
+        String decryptee="";
+        
+        for(i=0;i<c.length();i++)
+        {
+            ch=decaleCaractere(c.charAt(i),decalage);
+            decryptee+=ch;
+        }
+        this.chainecryptee=decryptee;
 
-    public String Crypte()
+        }
+    }
+    
+    
+    public String Decrypte()
     {
         int i;
         char c;
-        String cryptee="";
+        String decryptee="";
         
-			
-		
-        for(i=0;i<chaineclaire.length();i++)
+            
+        
+        for(i=0;i<chainecryptee.length();i++)
         {
-            c=decaleCaractere(chaineclaire.charAt(i),decalage);
-            cryptee+=c;
+            c=decaleCaractere(chainecryptee.charAt(i),(26-decalage));
+            decryptee+=c;
         }
-        return cryptee;
+        return decryptee;
     }
-
-    public String Decrypte()
+    
+ 
+    public String Crypte()
     {
-        return chaineclaire;
+        return chainecryptee;
     }
     
     private static char decaleCaractere (char c, int decalage)
-	{
-		return ( c < 'A' || c > 'Z') ? c : (char)(( (c - 'A' + decalage) % 26) + 'A');
-	}
+    {
+        return ( c < 'A' || c > 'Z') ? c : (char)(( (c - 'A' + decalage) % 26) + 'A');
+    }
 }
