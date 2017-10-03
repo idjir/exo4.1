@@ -1,17 +1,19 @@
 import java.*;
 
+
 public class ChaineCryptée
 {
     
     private int decalage;
     private String chainecryptee;
 
+   
+    
     //constructeur
-    public ChaineCryptée(int d, String c)
-    {   
-        //si la chaine est null afficher chainevide
-        if(c==null) {chainecryptee="chainevide";}
-        else
+    private ChaineCryptée(int d, String c)
+    {
+        if(c==null) {chainecryptee="chainevide";}   //si la chiane est vide afficher chaine vide
+        else    //sinon
         {
         this.decalage=d;
         int i;
@@ -29,6 +31,34 @@ public class ChaineCryptée
     }
     
     
+    ///////////////////////////////////////////////////////////////////2 méthodes ajoutées////////////////////////////////////////////////////////////////////////////////////////////
+     public static ChaineCryptée FromCrypted(String incrypted, int decal)
+    {
+         int i;
+        char c;
+        String clr="";
+        
+            
+        
+        for(i=0;i<incrypted.length();i++)
+        {
+            c=decaleCaractere(incrypted.charAt(i),(26-decal));
+            clr+=c;
+        }
+        
+        
+        return new ChaineCryptée(decal,clr);
+    }
+    
+    public static ChaineCryptée FromDecrypted( String indecrypted, int decal)
+    {
+        return new ChaineCryptée (decal,indecrypted);
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    //methode decrypter
     public String Decrypte()
     {
         int i;
@@ -45,7 +75,7 @@ public class ChaineCryptée
         return decryptee;
     }
     
- 
+    //methode crypter
     public String Crypte()
     {
         return chainecryptee;
